@@ -1,13 +1,18 @@
+/* Componente de pie de página para el Hotel el Rincón del Carmen */
 class HotelFooter extends HTMLElement {
+  /* El constructor se llama cuando se crea una instancia del componente. Aquí se inicializa el shadow DOM para encapsular el estilo y la estructura del componente. */
   constructor() {
+    /* Llama al constructor de la clase base HTMLElement para asegurarse de que el componente se inicialice correctamente */
     super();
+    /* Crea un shadow DOM para encapsular el estilo y la estructura del componente, evitando conflictos con otros estilos en la página */
     this.attachShadow({ mode: 'open' });
   }
-
+   /* El método connectedCallback se llama cuando el componente se agrega al DOM. Aquí se llama al método render para construir la estructura del pie de página. */
   connectedCallback() {
+    /* Llama al método render para construir la estructura del pie de página cuando el componente se agrega al DOM */
     this.render();
   }
-
+  /* El método render se encarga de construir la estructura HTML del pie de página y aplicar los estilos necesarios. Aquí se define el contenido del pie de página, incluyendo información sobre el hotel, enlaces rápidos y detalles de contacto. */
   render() {
     this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="css/components.css">

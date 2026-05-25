@@ -1,54 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Declaración del tipo de documento HTML -->
     <meta charset="UTF-8">
-    <!-- Configuración de codificación de caracteres a UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Configuración para que el diseño sea responsive -->
     <title>Hotel el Rincón del Carmen | Reserva tu descanso</title>
-    <!-- Título de la página que aparece en la pestaña del navegador -->
     <meta name="description" content="Bienvenido al Hotel el Rincón del Carmen. Disfruta de una experiencia inolvidable con nuestras lujosas habitaciones, spa y excelente servicio.">
-    <!-- Descripción de la página para SEO -->
-
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <!-- Optimización para cargar fuentes de Google -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Preconexión para mejorar el rendimiento al cargar fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Enlace a las fuentes de Google para estilos de texto -->
-
+    
     <!-- Global CSS -->
     <link rel="stylesheet" href="css/index.css">
-    <!-- Archivo CSS principal para los estilos globales -->
-
+    
     <!-- Component Styles -->
     <link rel="stylesheet" href="css/components.css">
-    <!-- Archivo CSS para los estilos de componentes -->
 </head>
 <body>
 
     <!-- Header Navigation Component -->
     <hotel-navbar></hotel-navbar>
-    <!-- Componente personalizado para la barra de navegación del encabezado -->
 
     <!-- Main Content Area for SPA routing -->
     <main id="app-container">
-        <!-- Contenedor principal donde se inyectarán las vistas dinámicas del enrutador -->
         <!-- Vistas serán inyectadas aquí por el enrutador -->
     </main>
 
     <!-- Footer Component -->
     <hotel-footer></hotel-footer>
-    <!-- Componente personalizado para el pie de página -->
 
     <!-- Modal Component -->
     <hotel-modal id="global-modal"></hotel-modal>
-    <!-- Componente personalizado para un modal global reutilizable -->
 
     <!-- Scripts -->
     <script type="module" src="js/app.js"></script>
-    <!-- Archivo JavaScript principal que inicializa la aplicación -->
 </body>
 </html>
