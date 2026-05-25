@@ -174,18 +174,21 @@ ul {
   font-weight: 500;
   display: flex;
   align-items: center;
+  background-color: rgba(255, 255, 255, 0.92);
+  color: #1f3822;
+  border: 1px solid rgba(47, 79, 47, 0.12);
 }
 
 .alert-error {
-  background-color: rgba(229, 152, 155, 0.15);
-  color: #b56c6e;
-  border: 1px solid rgba(229, 152, 155, 0.3);
+  background-color: rgba(229, 152, 155, 0.2);
+  color: #7a1f1f;
+  border: 1px solid rgba(229, 152, 155, 0.45);
 }
 
 .alert-success {
-  background-color: rgba(139, 168, 136, 0.15);
-  color: var(--primary-color-dark);
-  border: 1px solid rgba(139, 168, 136, 0.3);
+  background-color: rgba(111, 176, 115, 0.22);
+  color: #1f3822;
+  border: 1px solid rgba(111, 176, 115, 0.45);
 }
 
 /* Tags/Badges */

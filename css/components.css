@@ -184,8 +184,8 @@ a:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(31, 56, 34, 0.5); /* Elegant dark green overlay */
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
   z-index: 2000;
   align-items: center;
   justify-content: center;
@@ -199,13 +199,14 @@ a:hover {
 }
 
 .modal-content {
-  background: #cde4d1;
+  background: #f4f9f1;
+  color: #1f3822;
   padding: 2.5rem;
   border-radius: 16px;
-  border: 1px solid rgba(138, 191, 138, 0.8);
+  border: 1px solid rgba(47, 79, 47, 0.15);
   max-width: 500px;
   width: 90%;
-  box-shadow: 0 25px 50px -12px rgba(31, 56, 34, 0.25);
+  box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.35);
   transform: translateY(-20px) scale(0.98);
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
@@ -224,13 +225,13 @@ a:hover {
   border: none;
   font-size: 1.8rem;
   cursor: pointer;
-  color: #558f58;
+  color: #1f3822;
   transition: color 0.3s ease;
   line-height: 1;
 }
 
 .close-btn:hover {
-  color: #1f3822;
+  color: #0f1f0f;
 }
 
 .modal-title {

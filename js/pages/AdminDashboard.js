@@ -1,99 +1,114 @@
+// Importa el servicio de almacenamiento para gestionar datos relacionados con habitaciones, reservas y usuarios
 import { storageService } from '../services/StorageService.js';
 
+// Define la clase `AdminDashboard` como un componente personalizado
 class AdminDashboard extends HTMLElement {
   constructor() {
-    super();
-    this.attachShadow({ mode: 'open' });
-    this.currentTab = 'rooms'; // 'rooms' o 'reservations'
-    this.editingRoomId = null;
+    super(); // Llama al constructor de HTMLElement
+    this.attachShadow({ mode: 'open' }); // Crea un Shadow DOM para encapsular el estilo y la estructura del componente
+    this.currentTab = 'rooms'; // Define la pestaña activa por defecto ('rooms' o 'reservations')
+    this.editingRoomId = null; // Variable para almacenar el ID de la habitación que se está editando
   }
 
+  // Método que se ejecuta cuando el componente se agrega al DOM
   connectedCallback() {
-    const user = JSON.parse(sessionStorage.getItem('logged_user'));
+    const user = JSON.parse(sessionStorage.getItem('logged_user')); // Obtiene el usuario logueado desde el sessionStorage
     if (!user || user.rol !== 'admin') {
+      // Si no hay usuario o no es administrador, redirige a la página de inicio
       window.location.hash = '#home';
       return;
     }
-    this.render();
-    this.setupListeners();
+    this.render(); // Renderiza el contenido inicial del componente
+    this.setupListeners(); // Configura los eventos del componente
   }
 
+  // Configura los eventos para manejar interacciones dentro del componente
   setupListeners() {
     this.shadowRoot.addEventListener('click', (e) => {
-      // Tab switching
+      // Cambia entre pestañas (rooms y reservations)
       if (e.target.matches('.tab-btn')) {
-        this.currentTab = e.target.dataset.tab;
-        this.render();
+        this.currentTab = e.target.dataset.tab; // Cambia la pestaña activa
+        this.render(); // Vuelve a renderizar el contenido
       }
 
-      // Rooms management
+      // Gestión de habitaciones
       if (e.target.matches('.btn-delete-room')) {
-        if(confirm('¿Seguro de eliminar esta habitación?')) {
-          storageService.deleteRoom(e.target.dataset.id);
-          this.render();
+        // Elimina una habitación después de confirmar
+        if (confirm('¿Seguro de eliminar esta habitación?')) {
+          storageService.deleteRoom(e.target.dataset.id); // Llama al servicio para eliminar la habitación
+          this.render(); // Vuelve a renderizar el contenido
         }
       }
       if (e.target.matches('.btn-edit-room')) {
-        this.editingRoomId = e.target.dataset.id;
-        this.render(); // Re-render para mostrar el formulario con los datos cargados
+        // Activa el modo de edición para una habitación
+        this.editingRoomId = e.target.dataset.id; // Almacena el ID de la habitación que se está editando
+        this.render(); // Vuelve a renderizar el contenido
       }
       if (e.target.matches('#cancel-edit-room')) {
-        this.editingRoomId = null;
-        this.render();
+        // Cancela el modo de edición
+        this.editingRoomId = null; // Resetea el ID de la habitación en edición
+        this.render(); // Vuelve a renderizar el contenido
       }
 
-      // Reservations management
+      // Gestión de reservas
       if (e.target.matches('.btn-cancel-res')) {
-        if(confirm('¿Seguro de cancelar esta reserva?')) {
-          storageService.cancelReservation(e.target.dataset.id);
-          this.render();
+        // Cancela una reserva después de confirmar
+        if (confirm('¿Seguro de cancelar esta reserva?')) {
+          storageService.cancelReservation(e.target.dataset.id); // Llama al servicio para cancelar la reserva
+          this.render(); // Vuelve a renderizar el contenido
         }
       }
     });
 
     this.shadowRoot.addEventListener('submit', (e) => {
       if (e.target.id === 'room-form') {
-        e.preventDefault();
-        this.handleRoomSubmit(e.target);
+        // Maneja el envío del formulario de habitaciones
+        e.preventDefault(); // Previene el comportamiento por defecto del formulario
+        this.handleRoomSubmit(e.target); // Llama al método para procesar los datos del formulario
       }
     });
   }
 
+  // Maneja el envío del formulario de habitaciones (crear o actualizar)
   handleRoomSubmit(form) {
     const roomData = {
-      name: form.nombre.value,
-      beds: parseInt(form.camas.value),
-      maxGuests: parseInt(form.maxPersonas.value),
-      pricePerNight: parseFloat(form.precio.value),
-      services: form.servicios.value.split(',').map(s => s.trim()),
-      images: [form.imagen.value || 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=800'],
-      active: true
+      name: form.nombre.value, // Nombre de la habitación
+      beds: parseInt(form.camas.value), // Número de camas
+      maxGuests: parseInt(form.maxPersonas.value), // Capacidad máxima
+      pricePerNight: parseFloat(form.precio.value), // Precio por noche
+      services: form.servicios.value.split(',').map(s => s.trim()), // Servicios separados por comas
+      images: [form.imagen.value || 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=800'], // URL de la imagen
+      active: true // Estado activo de la habitación
     };
 
     if (this.editingRoomId) {
-      roomData.id = this.editingRoomId;
-      storageService.updateRoom(roomData);
-      window.showModal('Éxito', '<p class="alert alert-success">Habitación actualizada.</p>');
+      // Si se está editando una habitación existente
+      roomData.id = this.editingRoomId; // Agrega el ID de la habitación
+      storageService.updateRoom(roomData); // Actualiza la habitación en el servicio
+      window.showModal('Éxito', '<p class="alert alert-success">Habitación actualizada.</p>'); // Muestra un mensaje de éxito
     } else {
-      storageService.addRoom(roomData);
-      window.showModal('Éxito', '<p class="alert alert-success">Habitación creada.</p>');
+      // Si se está creando una nueva habitación
+      storageService.addRoom(roomData); // Agrega la nueva habitación al servicio
+      window.showModal('Éxito', '<p class="alert alert-success">Habitación creada.</p>'); // Muestra un mensaje de éxito
     }
     
-    this.editingRoomId = null;
-    this.render();
+    this.editingRoomId = null; // Resetea el ID de la habitación en edición
+    this.render(); // Vuelve a renderizar el contenido
   }
 
+  // Renderiza la pestaña de gestión de habitaciones
   renderRoomsTab() {
-    const rooms = storageService.getActiveRooms();
+    const rooms = storageService.getActiveRooms(); // Obtiene las habitaciones activas
     let editRoom = null;
     if (this.editingRoomId) {
-      editRoom = rooms.find(r => r.id === this.editingRoomId);
+      editRoom = rooms.find(r => r.id === this.editingRoomId); // Encuentra la habitación en edición
     }
 
     return `
       <div class="admin-section">
         <h3>${editRoom ? 'Editar Habitación' : 'Nueva Habitación'}</h3>
         <form id="room-form" class="form-grid">
+          <!-- Formulario para crear o editar habitaciones -->
           <div class="form-group full-width">
             <label>Nombre de Habitación</label>
             <input type="text" name="nombre" class="form-control" value="${editRoom ? editRoom.name : ''}" required>
@@ -156,10 +171,11 @@ class AdminDashboard extends HTMLElement {
     `;
   }
 
+  // Renderiza la pestaña de gestión de reservas
   renderReservationsTab() {
-    const reservations = storageService.getReservations();
-    const rooms = storageService.getRooms();
-    const users = storageService.getUsers();
+    const reservations = storageService.getReservations(); // Obtiene las reservas
+    const rooms = storageService.getRooms(); // Obtiene las habitaciones
+    const users = storageService.getUsers(); // Obtiene los usuarios
 
     return `
       <div class="admin-section">
@@ -178,8 +194,8 @@ class AdminDashboard extends HTMLElement {
             </thead>
             <tbody>
               ${reservations.map(res => {
-                const room = rooms.find(r => r.id === res.habitacionId);
-                const user = users.find(u => u.id === res.usuarioId);
+                const room = rooms.find(r => r.id === res.habitacionId); // Encuentra la habitación asociada
+                const user = users.find(u => u.id === res.usuarioId); // Encuentra el usuario asociado
                 return `
                   <tr>
                     <td><small>${res.id}</small></td>
@@ -201,6 +217,7 @@ class AdminDashboard extends HTMLElement {
     `;
   }
 
+  // Renderiza el contenido del componente según la pestaña activa
   render() {
     this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="css/pages.css">
@@ -221,4 +238,5 @@ class AdminDashboard extends HTMLElement {
   }
 }
 
+// Define el componente personalizado `admin-dashboard`
 customElements.define('admin-dashboard', AdminDashboard);
