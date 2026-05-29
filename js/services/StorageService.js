@@ -212,7 +212,200 @@ class StorageService {
       localStorage.setItem('hotel_users', JSON.stringify([INITIAL_ADMIN]));
     }
     if (!localStorage.getItem('hotel_reservations')) {
-      localStorage.setItem('hotel_reservations', JSON.stringify([]));
+      const dummyReservations = [
+        {
+          id: 'res-dummy-1',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-1',
+          fechaEntrada: '2026-01-10',
+          fechaSalida: '2026-01-15',
+          cantidadPersonas: 2,
+          valorTotal: 750000,
+          estado: 'activa'
+        },
+        {
+          id: 'res-dummy-2',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-2',
+          fechaEntrada: '2026-01-12',
+          fechaSalida: '2026-01-18',
+          cantidadPersonas: 4,
+          valorTotal: 1500000,
+          estado: 'activa'
+        },
+        {
+          id: 'res-dummy-3',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-3',
+          fechaEntrada: '2026-02-05',
+          fechaSalida: '2026-02-10',
+          cantidadPersonas: 2,
+          valorTotal: 2500000,
+          estado: 'cancelada'
+        },
+        {
+          id: 'res-dummy-4',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-1',
+          fechaEntrada: '2026-02-14',
+          fechaSalida: '2026-02-16',
+          cantidadPersonas: 2,
+          valorTotal: 300000,
+          estado: 'activa'
+        },
+        {
+          id: 'res-dummy-5',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-4',
+          fechaEntrada: '2026-03-01',
+          fechaSalida: '2026-03-05',
+          cantidadPersonas: 1,
+          valorTotal: 400000,
+          estado: 'activa'
+        },
+        {
+          id: 'res-dummy-6',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-5',
+          fechaEntrada: '2026-03-10',
+          fechaSalida: '2026-03-15',
+          cantidadPersonas: 1,
+          valorTotal: 600000,
+          estado: 'cancelada'
+        },
+        {
+          id: 'res-dummy-7',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-6',
+          fechaEntrada: '2026-04-12',
+          fechaSalida: '2026-04-18',
+          cantidadPersonas: 2,
+          valorTotal: 1080000,
+          estado: 'activa'
+        },
+        {
+          id: 'res-dummy-8',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-2',
+          fechaEntrada: '2026-05-01',
+          fechaSalida: '2026-05-07',
+          cantidadPersonas: 3,
+          valorTotal: 1500000,
+          estado: 'activa'
+        },
+        {
+          id: 'res-dummy-9',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-3',
+          fechaEntrada: '2026-05-15',
+          fechaSalida: '2026-05-20',
+          cantidadPersonas: 2,
+          valorTotal: 2500000,
+          estado: 'activa'
+        },
+        {
+          id: 'res-dummy-10',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-1',
+          fechaEntrada: '2026-05-25',
+          fechaSalida: '2026-05-28',
+          cantidadPersonas: 2,
+          valorTotal: 450000,
+          estado: 'cancelada'
+        },
+        {
+          id: 'res-dummy-11',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-7',
+          fechaEntrada: '2026-06-10',
+          fechaSalida: '2026-06-15',
+          cantidadPersonas: 2,
+          valorTotal: 1100000,
+          estado: 'activa'
+        },
+        {
+          id: 'res-dummy-12',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-8',
+          fechaEntrada: '2026-07-20',
+          fechaSalida: '2026-07-25',
+          cantidadPersonas: 2,
+          valorTotal: 1400000,
+          estado: 'activa'
+        },
+        {
+          id: 'res-dummy-13',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-9',
+          fechaEntrada: '2026-08-05',
+          fechaSalida: '2026-08-12',
+          cantidadPersonas: 4,
+          valorTotal: 2450000,
+          estado: 'activa'
+        },
+        {
+          id: 'res-dummy-14',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-10',
+          fechaEntrada: '2026-09-15',
+          fechaSalida: '2026-09-20',
+          cantidadPersonas: 2,
+          valorTotal: 1500000,
+          estado: 'activa'
+        },
+        {
+          id: 'res-dummy-15',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-11',
+          fechaEntrada: '2026-10-10',
+          fechaSalida: '2026-10-15',
+          cantidadPersonas: 4,
+          valorTotal: 2250000,
+          estado: 'cancelada'
+        },
+        {
+          id: 'res-dummy-16',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-12',
+          fechaEntrada: '2026-11-01',
+          fechaSalida: '2026-11-05',
+          cantidadPersonas: 2,
+          valorTotal: 2200000,
+          estado: 'activa'
+        },
+        {
+          id: 'res-dummy-17',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-13',
+          fechaEntrada: '2026-12-20',
+          fechaSalida: '2026-12-28',
+          cantidadPersonas: 4,
+          valorTotal: 5600000,
+          estado: 'activa'
+        },
+        // 2025 dummy data
+        {
+          id: 'res-dummy-2025-1',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-2',
+          fechaEntrada: '2025-06-15',
+          fechaSalida: '2025-06-20',
+          cantidadPersonas: 2,
+          valorTotal: 1250000,
+          estado: 'activa'
+        },
+        {
+          id: 'res-dummy-2025-2',
+          usuarioId: 'admin-1',
+          habitacionId: 'room-3',
+          fechaEntrada: '2025-06-18',
+          fechaSalida: '2025-06-25',
+          cantidadPersonas: 2,
+          valorTotal: 3500000,
+          estado: 'cancelada'
+        }
+      ];
+      localStorage.setItem('hotel_reservations', JSON.stringify(dummyReservations));
     }
   }
 
